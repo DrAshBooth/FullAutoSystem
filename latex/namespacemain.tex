@@ -1,0 +1,221 @@
+\hypertarget{namespacemain}{\section{main Namespace Reference}
+\label{namespacemain}\index{main@{main}}
+}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+tuple \hyperlink{namespacemain_a41cda8ca94e912c8abb2d5f880118cc4}{results\-\_\-log} open('\{\}/results\-\_\-log.\-csv'.format(os.\-getcwd()), 'w')
+\item 
+tuple \hyperlink{namespacemain_aebf74fc505cbd00f19e130b462531252}{results} open('\{\}/results.\-csv'.format(os.\-getcwd()), 'w')
+\item 
+int \hyperlink{namespacemain_a0796e61e25078d7fc619d17d9ef2016f}{total\-\_\-predictions} 0
+\item 
+int \hyperlink{namespacemain_af624554e0f6b710e1be0ba525c717b48}{correct\-\_\-predictions} 0
+\item 
+int \hyperlink{namespacemain_a71a9921366b31bec8dfbbdc963039a1a}{profit} 0
+\item 
+tuple \hyperlink{namespacemain_a11be7005c54d47daa509fba406aac63e}{morn\-V\-W\-A\-P} \hyperlink{classvwap_1_1_v_w_a_p}{V\-W\-A\-P}(M\-A\-R\-K\-E\-T\-O\-P\-E\-N, M\-A\-R\-K\-E\-T\-O\-P\-E\-N + W\-I\-N\-S\-I\-Z\-E, B\-I\-N\-S\-I\-Z\-E)
+\item 
+tuple \hyperlink{namespacemain_ab8560876136311d8e4a19ff8fc2cfeff}{eve\-V\-W\-A\-P} \hyperlink{classvwap_1_1_v_w_a_p}{V\-W\-A\-P}(M\-A\-R\-K\-E\-T\-C\-L\-O\-S\-E -\/ W\-I\-N\-S\-I\-Z\-E, M\-A\-R\-K\-E\-T\-C\-L\-O\-S\-E, B\-I\-N\-S\-I\-Z\-E)
+\item 
+\hyperlink{namespacemain_a7fa968fb4b6bd3982ff2852514448277}{start\-Database} S\-T\-A\-R\-T\-D\-A\-T\-E-\/training\-\_\-window-\/lag\-\_\-date
+\item 
+\hyperlink{namespacemain_a77925137ac37065898ded0ba59cec7c7}{end\-Database} E\-N\-D\-D\-A\-T\-E
+\item 
+tuple \hyperlink{namespacemain_af268f93db929575de02efc78bdbcb8dd}{the\-U\-T\-Cdates} r('index(D\-B)')
+\item 
+list \hyperlink{namespacemain_a2858a9cb8d47c2fac000edfd9eb5441f}{trading\-Days} \mbox{[}$\,$\mbox{]}
+\item 
+\hyperlink{namespacemain_a3109aa438d2ce6e6805dbce401dae70e}{training\-\_\-start} test\-\_\-date-\/training\-\_\-window
+\item 
+\hyperlink{namespacemain_a13bddefadc5986a6f749db9e47271727}{day\-\_\-before} test\-\_\-date-\/one\-\_\-day
+\item 
+tuple \hyperlink{namespacemain_a50e2bb2c2453d804e5d6b3a5b74c1cf1}{filename} training\-\_\-start.\-strftime('\%Y\%\hyperlink{namespacemain_adbc6b6d451e5853c258a6713144bae5a}{m}\%d')
+\item 
+string \hyperlink{namespacemain_aafb9018fe880bf4127e57a72c103563b}{command\-\_\-line} '\{\}/run\-A\-D\-Tree.\-sh '
+\item 
+tuple \hyperlink{namespacemain_a1fafe44ec9b6c9b2b579106b6515eb1e}{process} subprocess.\-Popen(\mbox{[}\hyperlink{namespacemain_aafb9018fe880bf4127e57a72c103563b}{command\-\_\-line}\mbox{]}, shell=True)
+\item 
+tuple \hyperlink{namespacemain_ae992f00b1fb1709567ce49dfc1e91993}{retcode} process.\-wait()
+\item 
+string \hyperlink{namespacemain_ab2ce12225f499c96566bee050694f576}{test\-\_\-file} '.test'
+\item 
+string \hyperlink{namespacemain_addc9c6a1eb509aa124df4c1fa66cf891}{spec\-\_\-file} 'spec.\-spec'
+\item 
+string \hyperlink{namespacemain_ab4ac9dda3d2fa82f888de091614f6090}{classifier\-\_\-name} '\{\}predict'
+\item 
+tuple \hyperlink{namespacemain_adbc6b6d451e5853c258a6713144bae5a}{m} \-\_\-\-\_\-import\-\_\-\-\_\-(\hyperlink{namespacemain_ab4ac9dda3d2fa82f888de091614f6090}{classifier\-\_\-name}, globals(), locals(), \mbox{[}'\hyperlink{namespacemain_a850e5686e3d530b318c9f2b73c5929f3}{A\-D\-Tree}'\mbox{]})
+\item 
+tuple \hyperlink{namespacemain_a850e5686e3d530b318c9f2b73c5929f3}{A\-D\-Tree} getattr(\hyperlink{namespacemain_adbc6b6d451e5853c258a6713144bae5a}{m}, 'A\-Tree')
+\item 
+tuple \hyperlink{namespacemain_a07830f194ffad5f009530ec549a93b5f}{classifier} \hyperlink{namespacemain_a850e5686e3d530b318c9f2b73c5929f3}{A\-D\-Tree}(\hyperlink{namespacemain_ab2ce12225f499c96566bee050694f576}{test\-\_\-file}, \hyperlink{namespacemain_addc9c6a1eb509aa124df4c1fa66cf891}{spec\-\_\-file})
+\item 
+tuple \hyperlink{namespacemain_a52dcd672d21ad23f8d3db387b1b17983}{score} classifier.\-get\-\_\-scores()
+\item 
+int \hyperlink{namespacemain_a3d86c9a974d908ad52608b11f24df15d}{prediction} 1
+\item 
+\hyperlink{namespacemain_ace774159e8fcc00c1958a240079dd5e2}{buying} True
+\item 
+tuple \hyperlink{namespacemain_a525425c50f2ffbe24b80ac781fd87ea4}{actual\-\_\-file} open('\{\}/\{\}.test'.format(os.\-getcwd(), \hyperlink{namespacemain_a50e2bb2c2453d804e5d6b3a5b74c1cf1}{filename}), 'r')
+\item 
+tuple \hyperlink{namespacemain_ad72f74668d86fda5048df035955479d9}{all\-\_\-lines} actual\-\_\-file.\-readlines()
+\item 
+list \hyperlink{namespacemain_ab5cb346125304206e92de6618c43315e}{first\-\_\-line} \hyperlink{namespacemain_ad72f74668d86fda5048df035955479d9}{all\-\_\-lines}\mbox{[}0\mbox{]}
+\item 
+tuple \hyperlink{namespacemain_a5d8df8cfa1e45c747b56adcb04a6cc16}{first\-\_\-line\-\_\-split} first\-\_\-line.\-split(',')
+\item 
+list \hyperlink{namespacemain_aefdbe12162b07e208468d2e45b949f7d}{actual} \hyperlink{namespacemain_a5d8df8cfa1e45c747b56adcb04a6cc16}{first\-\_\-line\-\_\-split}\mbox{[}-\/1\mbox{]}
+\item 
+tuple \hyperlink{namespacemain_a5ddde740f03e7759f7635b84f49c0cde}{the\-Open} float(r('D\-B\$open\mbox{[}remote\-Test\-\_\-date\mbox{]}')\mbox{[}0\mbox{]})
+\item 
+tuple \hyperlink{namespacemain_a7b7f8e1866fa939903d669eda1f85843}{the\-Close} float(r('D\-B\$close\mbox{[}remote\-Test\-\_\-date\mbox{]}')\mbox{[}0\mbox{]})
+\item 
+tuple \hyperlink{namespacemain_a118e0bd8e297ab3304833a9df0cec090}{num2trade} math.\-floor(A\-M\-T\-I\-N\-V\-E\-S\-T / \hyperlink{namespacemain_a5ddde740f03e7759f7635b84f49c0cde}{the\-Open})
+\item 
+tuple \hyperlink{namespacemain_adb71e21eddaadc4f2572762007577c68}{vwap\-Profile\-O} morn\-V\-W\-A\-P.\-split\-Order(\hyperlink{namespacemain_a118e0bd8e297ab3304833a9df0cec090}{num2trade})
+\item 
+tuple \hyperlink{namespacemain_a98bb2a52e5b44a9ceba4f520b3344bd8}{vwap\-Profile\-C} eve\-V\-W\-A\-P.\-split\-Order(\hyperlink{namespacemain_a118e0bd8e297ab3304833a9df0cec090}{num2trade})
+\item 
+tuple \hyperlink{namespacemain_ad5e5023cc95c9e2c194d60e014d06a70}{Morn\-Trading} \hyperlink{classexecutioner_1_1_executioner}{Executioner}(\hyperlink{namespacemain_ace774159e8fcc00c1958a240079dd5e2}{buying}, test\-\_\-date, M\-A\-R\-K\-E\-T\-O\-P\-E\-N, M\-A\-R\-K\-E\-T\-O\-P\-E\-N + W\-I\-N\-S\-I\-Z\-E, \hyperlink{namespacemain_adb71e21eddaadc4f2572762007577c68}{vwap\-Profile\-O}, \hyperlink{namespacemain_a5ddde740f03e7759f7635b84f49c0cde}{the\-Open}, M\-M\-A\-X)
+\item 
+tuple \hyperlink{namespacemain_a55b19868bf4a9d05834347d658030e7f}{Eve\-Trading} \hyperlink{classexecutioner_1_1_executioner}{Executioner}(not \hyperlink{namespacemain_ace774159e8fcc00c1958a240079dd5e2}{buying}, test\-\_\-date, M\-A\-R\-K\-E\-T\-C\-L\-O\-S\-E -\/ W\-I\-N\-S\-I\-Z\-E, M\-A\-R\-K\-E\-T\-C\-L\-O\-S\-E, \hyperlink{namespacemain_a98bb2a52e5b44a9ceba4f520b3344bd8}{vwap\-Profile\-C}, \hyperlink{namespacemain_a7b7f8e1866fa939903d669eda1f85843}{the\-Close}, M\-M\-A\-X)
+\item 
+tuple \hyperlink{namespacemain_a26df9d6e1bf44bd992060b30c6a7a403}{day\-Profit} (A\-M\-T\-I\-N\-V\-E\-S\-T $\ast$ (abs(\hyperlink{namespacemain_a5ddde740f03e7759f7635b84f49c0cde}{the\-Open} -\/ \hyperlink{namespacemain_a7b7f8e1866fa939903d669eda1f85843}{the\-Close}) / float(\hyperlink{namespacemain_a5ddde740f03e7759f7635b84f49c0cde}{the\-Open})))
+\item 
+tuple \hyperlink{namespacemain_a3479b13a7722446bbb0445aea9b4c7d3}{Pn\-L} (100 $\ast$ (\hyperlink{namespacemain_a71a9921366b31bec8dfbbdc963039a1a}{profit} / float(A\-M\-T\-I\-N\-V\-E\-S\-T)))
+\item 
+tuple \hyperlink{namespacemain_ae9fa3f5086214b1a435c317bfeccfe8c}{perc} ((\hyperlink{namespacemain_af624554e0f6b710e1be0ba525c717b48}{correct\-\_\-predictions} / float(\hyperlink{namespacemain_a0796e61e25078d7fc619d17d9ef2016f}{total\-\_\-predictions})) $\ast$ 100)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}Created on 15 Aug 2012
+
+@author: Ash Booth
+\end{DoxyVerb}
+ 
+
+\subsection{Variable Documentation}
+\hypertarget{namespacemain_aefdbe12162b07e208468d2e45b949f7d}{\index{main@{main}!actual@{actual}}
+\index{actual@{actual}!main@{main}}
+\subsubsection[{actual}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-actual {\bf first\-\_\-line\-\_\-split}\mbox{[}-\/1\mbox{]}}}\label{namespacemain_aefdbe12162b07e208468d2e45b949f7d}
+\hypertarget{namespacemain_a525425c50f2ffbe24b80ac781fd87ea4}{\index{main@{main}!actual\-\_\-file@{actual\-\_\-file}}
+\index{actual\-\_\-file@{actual\-\_\-file}!main@{main}}
+\subsubsection[{actual\-\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-actual\-\_\-file open('\{\}/\{\}.test'.format(os.\-getcwd(), {\bf filename}), 'r')}}\label{namespacemain_a525425c50f2ffbe24b80ac781fd87ea4}
+\hypertarget{namespacemain_a850e5686e3d530b318c9f2b73c5929f3}{\index{main@{main}!A\-D\-Tree@{A\-D\-Tree}}
+\index{A\-D\-Tree@{A\-D\-Tree}!main@{main}}
+\subsubsection[{A\-D\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-A\-D\-Tree getattr({\bf m}, 'A\-Tree')}}\label{namespacemain_a850e5686e3d530b318c9f2b73c5929f3}
+\hypertarget{namespacemain_ad72f74668d86fda5048df035955479d9}{\index{main@{main}!all\-\_\-lines@{all\-\_\-lines}}
+\index{all\-\_\-lines@{all\-\_\-lines}!main@{main}}
+\subsubsection[{all\-\_\-lines}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-all\-\_\-lines actual\-\_\-file.\-readlines()}}\label{namespacemain_ad72f74668d86fda5048df035955479d9}
+\hypertarget{namespacemain_ace774159e8fcc00c1958a240079dd5e2}{\index{main@{main}!buying@{buying}}
+\index{buying@{buying}!main@{main}}
+\subsubsection[{buying}]{\setlength{\rightskip}{0pt plus 5cm}main.\-buying True}}\label{namespacemain_ace774159e8fcc00c1958a240079dd5e2}
+\hypertarget{namespacemain_a07830f194ffad5f009530ec549a93b5f}{\index{main@{main}!classifier@{classifier}}
+\index{classifier@{classifier}!main@{main}}
+\subsubsection[{classifier}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-classifier {\bf A\-D\-Tree}({\bf test\-\_\-file}, {\bf spec\-\_\-file})}}\label{namespacemain_a07830f194ffad5f009530ec549a93b5f}
+\hypertarget{namespacemain_ab4ac9dda3d2fa82f888de091614f6090}{\index{main@{main}!classifier\-\_\-name@{classifier\-\_\-name}}
+\index{classifier\-\_\-name@{classifier\-\_\-name}!main@{main}}
+\subsubsection[{classifier\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}string main.\-classifier\-\_\-name '\{\}predict'}}\label{namespacemain_ab4ac9dda3d2fa82f888de091614f6090}
+\hypertarget{namespacemain_aafb9018fe880bf4127e57a72c103563b}{\index{main@{main}!command\-\_\-line@{command\-\_\-line}}
+\index{command\-\_\-line@{command\-\_\-line}!main@{main}}
+\subsubsection[{command\-\_\-line}]{\setlength{\rightskip}{0pt plus 5cm}string main.\-command\-\_\-line '\{\}/run\-A\-D\-Tree.\-sh '}}\label{namespacemain_aafb9018fe880bf4127e57a72c103563b}
+\hypertarget{namespacemain_af624554e0f6b710e1be0ba525c717b48}{\index{main@{main}!correct\-\_\-predictions@{correct\-\_\-predictions}}
+\index{correct\-\_\-predictions@{correct\-\_\-predictions}!main@{main}}
+\subsubsection[{correct\-\_\-predictions}]{\setlength{\rightskip}{0pt plus 5cm}int main.\-correct\-\_\-predictions 0}}\label{namespacemain_af624554e0f6b710e1be0ba525c717b48}
+\hypertarget{namespacemain_a13bddefadc5986a6f749db9e47271727}{\index{main@{main}!day\-\_\-before@{day\-\_\-before}}
+\index{day\-\_\-before@{day\-\_\-before}!main@{main}}
+\subsubsection[{day\-\_\-before}]{\setlength{\rightskip}{0pt plus 5cm}main.\-day\-\_\-before test\-\_\-date-\/one\-\_\-day}}\label{namespacemain_a13bddefadc5986a6f749db9e47271727}
+\hypertarget{namespacemain_a26df9d6e1bf44bd992060b30c6a7a403}{\index{main@{main}!day\-Profit@{day\-Profit}}
+\index{day\-Profit@{day\-Profit}!main@{main}}
+\subsubsection[{day\-Profit}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-day\-Profit (A\-M\-T\-I\-N\-V\-E\-S\-T $\ast$ (abs({\bf the\-Open} -\/ {\bf the\-Close}) / float({\bf the\-Open})))}}\label{namespacemain_a26df9d6e1bf44bd992060b30c6a7a403}
+\hypertarget{namespacemain_a77925137ac37065898ded0ba59cec7c7}{\index{main@{main}!end\-Database@{end\-Database}}
+\index{end\-Database@{end\-Database}!main@{main}}
+\subsubsection[{end\-Database}]{\setlength{\rightskip}{0pt plus 5cm}main.\-end\-Database E\-N\-D\-D\-A\-T\-E}}\label{namespacemain_a77925137ac37065898ded0ba59cec7c7}
+\hypertarget{namespacemain_a55b19868bf4a9d05834347d658030e7f}{\index{main@{main}!Eve\-Trading@{Eve\-Trading}}
+\index{Eve\-Trading@{Eve\-Trading}!main@{main}}
+\subsubsection[{Eve\-Trading}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-Eve\-Trading {\bf Executioner}(not {\bf buying}, test\-\_\-date, M\-A\-R\-K\-E\-T\-C\-L\-O\-S\-E -\/ W\-I\-N\-S\-I\-Z\-E, M\-A\-R\-K\-E\-T\-C\-L\-O\-S\-E, {\bf vwap\-Profile\-C}, {\bf the\-Close}, M\-M\-A\-X)}}\label{namespacemain_a55b19868bf4a9d05834347d658030e7f}
+\hypertarget{namespacemain_ab8560876136311d8e4a19ff8fc2cfeff}{\index{main@{main}!eve\-V\-W\-A\-P@{eve\-V\-W\-A\-P}}
+\index{eve\-V\-W\-A\-P@{eve\-V\-W\-A\-P}!main@{main}}
+\subsubsection[{eve\-V\-W\-A\-P}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-eve\-V\-W\-A\-P {\bf V\-W\-A\-P}(M\-A\-R\-K\-E\-T\-C\-L\-O\-S\-E -\/ W\-I\-N\-S\-I\-Z\-E, M\-A\-R\-K\-E\-T\-C\-L\-O\-S\-E, B\-I\-N\-S\-I\-Z\-E)}}\label{namespacemain_ab8560876136311d8e4a19ff8fc2cfeff}
+\hypertarget{namespacemain_a50e2bb2c2453d804e5d6b3a5b74c1cf1}{\index{main@{main}!filename@{filename}}
+\index{filename@{filename}!main@{main}}
+\subsubsection[{filename}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-filename training\-\_\-start.\-strftime('\%Y\%{\bf m}\%d')}}\label{namespacemain_a50e2bb2c2453d804e5d6b3a5b74c1cf1}
+\hypertarget{namespacemain_ab5cb346125304206e92de6618c43315e}{\index{main@{main}!first\-\_\-line@{first\-\_\-line}}
+\index{first\-\_\-line@{first\-\_\-line}!main@{main}}
+\subsubsection[{first\-\_\-line}]{\setlength{\rightskip}{0pt plus 5cm}list main.\-first\-\_\-line {\bf all\-\_\-lines}\mbox{[}0\mbox{]}}}\label{namespacemain_ab5cb346125304206e92de6618c43315e}
+\hypertarget{namespacemain_a5d8df8cfa1e45c747b56adcb04a6cc16}{\index{main@{main}!first\-\_\-line\-\_\-split@{first\-\_\-line\-\_\-split}}
+\index{first\-\_\-line\-\_\-split@{first\-\_\-line\-\_\-split}!main@{main}}
+\subsubsection[{first\-\_\-line\-\_\-split}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-first\-\_\-line\-\_\-split first\-\_\-line.\-split(',')}}\label{namespacemain_a5d8df8cfa1e45c747b56adcb04a6cc16}
+\hypertarget{namespacemain_adbc6b6d451e5853c258a6713144bae5a}{\index{main@{main}!m@{m}}
+\index{m@{m}!main@{main}}
+\subsubsection[{m}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-m \-\_\-\-\_\-import\-\_\-\-\_\-({\bf classifier\-\_\-name}, globals(), locals(), \mbox{[}'{\bf A\-D\-Tree}'\mbox{]})}}\label{namespacemain_adbc6b6d451e5853c258a6713144bae5a}
+\hypertarget{namespacemain_ad5e5023cc95c9e2c194d60e014d06a70}{\index{main@{main}!Morn\-Trading@{Morn\-Trading}}
+\index{Morn\-Trading@{Morn\-Trading}!main@{main}}
+\subsubsection[{Morn\-Trading}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-Morn\-Trading {\bf Executioner}({\bf buying}, test\-\_\-date, M\-A\-R\-K\-E\-T\-O\-P\-E\-N, M\-A\-R\-K\-E\-T\-O\-P\-E\-N + W\-I\-N\-S\-I\-Z\-E, {\bf vwap\-Profile\-O}, {\bf the\-Open}, M\-M\-A\-X)}}\label{namespacemain_ad5e5023cc95c9e2c194d60e014d06a70}
+\hypertarget{namespacemain_a11be7005c54d47daa509fba406aac63e}{\index{main@{main}!morn\-V\-W\-A\-P@{morn\-V\-W\-A\-P}}
+\index{morn\-V\-W\-A\-P@{morn\-V\-W\-A\-P}!main@{main}}
+\subsubsection[{morn\-V\-W\-A\-P}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-morn\-V\-W\-A\-P {\bf V\-W\-A\-P}(M\-A\-R\-K\-E\-T\-O\-P\-E\-N, M\-A\-R\-K\-E\-T\-O\-P\-E\-N + W\-I\-N\-S\-I\-Z\-E, B\-I\-N\-S\-I\-Z\-E)}}\label{namespacemain_a11be7005c54d47daa509fba406aac63e}
+\hypertarget{namespacemain_a118e0bd8e297ab3304833a9df0cec090}{\index{main@{main}!num2trade@{num2trade}}
+\index{num2trade@{num2trade}!main@{main}}
+\subsubsection[{num2trade}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-num2trade math.\-floor(A\-M\-T\-I\-N\-V\-E\-S\-T / {\bf the\-Open})}}\label{namespacemain_a118e0bd8e297ab3304833a9df0cec090}
+\hypertarget{namespacemain_ae9fa3f5086214b1a435c317bfeccfe8c}{\index{main@{main}!perc@{perc}}
+\index{perc@{perc}!main@{main}}
+\subsubsection[{perc}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-perc (({\bf correct\-\_\-predictions} / float({\bf total\-\_\-predictions})) $\ast$ 100)}}\label{namespacemain_ae9fa3f5086214b1a435c317bfeccfe8c}
+\hypertarget{namespacemain_a3479b13a7722446bbb0445aea9b4c7d3}{\index{main@{main}!Pn\-L@{Pn\-L}}
+\index{Pn\-L@{Pn\-L}!main@{main}}
+\subsubsection[{Pn\-L}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-Pn\-L (100 $\ast$ ({\bf profit} / float(A\-M\-T\-I\-N\-V\-E\-S\-T)))}}\label{namespacemain_a3479b13a7722446bbb0445aea9b4c7d3}
+\hypertarget{namespacemain_a3d86c9a974d908ad52608b11f24df15d}{\index{main@{main}!prediction@{prediction}}
+\index{prediction@{prediction}!main@{main}}
+\subsubsection[{prediction}]{\setlength{\rightskip}{0pt plus 5cm}int main.\-prediction 1}}\label{namespacemain_a3d86c9a974d908ad52608b11f24df15d}
+\hypertarget{namespacemain_a1fafe44ec9b6c9b2b579106b6515eb1e}{\index{main@{main}!process@{process}}
+\index{process@{process}!main@{main}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-process subprocess.\-Popen(\mbox{[}{\bf command\-\_\-line}\mbox{]}, shell=True)}}\label{namespacemain_a1fafe44ec9b6c9b2b579106b6515eb1e}
+\hypertarget{namespacemain_a71a9921366b31bec8dfbbdc963039a1a}{\index{main@{main}!profit@{profit}}
+\index{profit@{profit}!main@{main}}
+\subsubsection[{profit}]{\setlength{\rightskip}{0pt plus 5cm}int main.\-profit 0}}\label{namespacemain_a71a9921366b31bec8dfbbdc963039a1a}
+\hypertarget{namespacemain_aebf74fc505cbd00f19e130b462531252}{\index{main@{main}!results@{results}}
+\index{results@{results}!main@{main}}
+\subsubsection[{results}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-results open('\{\}/results.\-csv'.format(os.\-getcwd()), 'w')}}\label{namespacemain_aebf74fc505cbd00f19e130b462531252}
+\hypertarget{namespacemain_a41cda8ca94e912c8abb2d5f880118cc4}{\index{main@{main}!results\-\_\-log@{results\-\_\-log}}
+\index{results\-\_\-log@{results\-\_\-log}!main@{main}}
+\subsubsection[{results\-\_\-log}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-results\-\_\-log open('\{\}/results\-\_\-log.\-csv'.format(os.\-getcwd()), 'w')}}\label{namespacemain_a41cda8ca94e912c8abb2d5f880118cc4}
+\hypertarget{namespacemain_ae992f00b1fb1709567ce49dfc1e91993}{\index{main@{main}!retcode@{retcode}}
+\index{retcode@{retcode}!main@{main}}
+\subsubsection[{retcode}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-retcode process.\-wait()}}\label{namespacemain_ae992f00b1fb1709567ce49dfc1e91993}
+\hypertarget{namespacemain_a52dcd672d21ad23f8d3db387b1b17983}{\index{main@{main}!score@{score}}
+\index{score@{score}!main@{main}}
+\subsubsection[{score}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-score classifier.\-get\-\_\-scores()}}\label{namespacemain_a52dcd672d21ad23f8d3db387b1b17983}
+\hypertarget{namespacemain_addc9c6a1eb509aa124df4c1fa66cf891}{\index{main@{main}!spec\-\_\-file@{spec\-\_\-file}}
+\index{spec\-\_\-file@{spec\-\_\-file}!main@{main}}
+\subsubsection[{spec\-\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}string main.\-spec\-\_\-file 'spec.\-spec'}}\label{namespacemain_addc9c6a1eb509aa124df4c1fa66cf891}
+\hypertarget{namespacemain_a7fa968fb4b6bd3982ff2852514448277}{\index{main@{main}!start\-Database@{start\-Database}}
+\index{start\-Database@{start\-Database}!main@{main}}
+\subsubsection[{start\-Database}]{\setlength{\rightskip}{0pt plus 5cm}main.\-start\-Database S\-T\-A\-R\-T\-D\-A\-T\-E-\/training\-\_\-window-\/lag\-\_\-date}}\label{namespacemain_a7fa968fb4b6bd3982ff2852514448277}
+\hypertarget{namespacemain_ab2ce12225f499c96566bee050694f576}{\index{main@{main}!test\-\_\-file@{test\-\_\-file}}
+\index{test\-\_\-file@{test\-\_\-file}!main@{main}}
+\subsubsection[{test\-\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}string main.\-test\-\_\-file '.test'}}\label{namespacemain_ab2ce12225f499c96566bee050694f576}
+\hypertarget{namespacemain_a7b7f8e1866fa939903d669eda1f85843}{\index{main@{main}!the\-Close@{the\-Close}}
+\index{the\-Close@{the\-Close}!main@{main}}
+\subsubsection[{the\-Close}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-the\-Close float(r('D\-B\$close\mbox{[}remote\-Test\-\_\-date\mbox{]}')\mbox{[}0\mbox{]})}}\label{namespacemain_a7b7f8e1866fa939903d669eda1f85843}
+\hypertarget{namespacemain_a5ddde740f03e7759f7635b84f49c0cde}{\index{main@{main}!the\-Open@{the\-Open}}
+\index{the\-Open@{the\-Open}!main@{main}}
+\subsubsection[{the\-Open}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-the\-Open float(r('D\-B\$open\mbox{[}remote\-Test\-\_\-date\mbox{]}')\mbox{[}0\mbox{]})}}\label{namespacemain_a5ddde740f03e7759f7635b84f49c0cde}
+\hypertarget{namespacemain_af268f93db929575de02efc78bdbcb8dd}{\index{main@{main}!the\-U\-T\-Cdates@{the\-U\-T\-Cdates}}
+\index{the\-U\-T\-Cdates@{the\-U\-T\-Cdates}!main@{main}}
+\subsubsection[{the\-U\-T\-Cdates}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-the\-U\-T\-Cdates r('index(D\-B)')}}\label{namespacemain_af268f93db929575de02efc78bdbcb8dd}
+\hypertarget{namespacemain_a0796e61e25078d7fc619d17d9ef2016f}{\index{main@{main}!total\-\_\-predictions@{total\-\_\-predictions}}
+\index{total\-\_\-predictions@{total\-\_\-predictions}!main@{main}}
+\subsubsection[{total\-\_\-predictions}]{\setlength{\rightskip}{0pt plus 5cm}int main.\-total\-\_\-predictions 0}}\label{namespacemain_a0796e61e25078d7fc619d17d9ef2016f}
+\hypertarget{namespacemain_a2858a9cb8d47c2fac000edfd9eb5441f}{\index{main@{main}!trading\-Days@{trading\-Days}}
+\index{trading\-Days@{trading\-Days}!main@{main}}
+\subsubsection[{trading\-Days}]{\setlength{\rightskip}{0pt plus 5cm}list main.\-trading\-Days \mbox{[}$\,$\mbox{]}}}\label{namespacemain_a2858a9cb8d47c2fac000edfd9eb5441f}
+\hypertarget{namespacemain_a3109aa438d2ce6e6805dbce401dae70e}{\index{main@{main}!training\-\_\-start@{training\-\_\-start}}
+\index{training\-\_\-start@{training\-\_\-start}!main@{main}}
+\subsubsection[{training\-\_\-start}]{\setlength{\rightskip}{0pt plus 5cm}main.\-training\-\_\-start test\-\_\-date-\/training\-\_\-window}}\label{namespacemain_a3109aa438d2ce6e6805dbce401dae70e}
+\hypertarget{namespacemain_a98bb2a52e5b44a9ceba4f520b3344bd8}{\index{main@{main}!vwap\-Profile\-C@{vwap\-Profile\-C}}
+\index{vwap\-Profile\-C@{vwap\-Profile\-C}!main@{main}}
+\subsubsection[{vwap\-Profile\-C}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-vwap\-Profile\-C eve\-V\-W\-A\-P.\-split\-Order({\bf num2trade})}}\label{namespacemain_a98bb2a52e5b44a9ceba4f520b3344bd8}
+\hypertarget{namespacemain_adb71e21eddaadc4f2572762007577c68}{\index{main@{main}!vwap\-Profile\-O@{vwap\-Profile\-O}}
+\index{vwap\-Profile\-O@{vwap\-Profile\-O}!main@{main}}
+\subsubsection[{vwap\-Profile\-O}]{\setlength{\rightskip}{0pt plus 5cm}tuple main.\-vwap\-Profile\-O morn\-V\-W\-A\-P.\-split\-Order({\bf num2trade})}}\label{namespacemain_adb71e21eddaadc4f2572762007577c68}

@@ -1,0 +1,129 @@
+library(fTrading)
+assetData<-getYahooData(APPL,20010101,20020101,freq="daily",adjust=TRUE)
+library(TTR)
+assetData<-getYahooData(APPL,20010101,20020101,freq="daily",adjust=TRUE)
+assetData<-getYahooData('APPL',20010101,20020101,freq="daily",adjust=TRUE)
+assetData<-getYahooData('SPy',20010101,20020101,freq="daily",adjust=TRUE)
+plot(assetData)
+plot(assetData$Close)
+attach(assetData)
+type(assetData)
+class(assetData)
+assetData$Close
+assetData['2001-12']
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/oneStockXTS.r")
+testDB<-createDatabase('SPY',20010101,20020101)
+a<-c(2:10:2)
+a<-c(2:10)
+b<-c(1:9)
+a<b
+ a>b
+a
+lag.a <- c(tail(a,-1),NA)
+lag.a
+a==b
+lag.a <- c(NA,head(a,-1))
+lag.a
+lag.a==b
+diff = lag.a - b
+help(but.last)
+help(which)
+which(lag.a==b)
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/oneStockXTS.r")
+remoteTicker='AAPL'
+remoteSTART='20080102'
+remoteEND='20080122'
+remoteSTART='20070401'
+DB<-createDatabase(remoteTICKER,remoteSTART,remoteEND)
+DB<-createDatabase(remoteTicker,remoteSTART,remoteEND)
+remoteTest_date='20080102'
+DB$open[remoteTest_date]
+DB$open
+DB
+tickData<-read.csv("20120621AAPL US Equityopen.csv",header=F)
+tickData[1]
+tickData[2]
+bids<-tickData[tickData[2]=='BEST_BID',]
+asks<-tickData[tickData[2]=='BEST_ASK',]
+bids
+plot.ts(bids[1],bids[2])
+bidsxts<xts(bids[,-1],order.by=bids[,1])
+bidsxts<-xts(bids[,-1],order.by=bids[,1])
+bidsxts<-as.xts(bids[,-1],order.by=bids[,1])
+library(xts)
+bidsxts<-xts(bids[,-1],order.by=bids[,1])
+bids[,1]
+bids[5,1]
+bids[1,1,1]
+bids[1,1]
+bids[1]
+bids[,1]
+bidsxts<-xts(bids[1],order.by=bids[1])
+bidsxts<-xts(bids[,-1],order.by=as.Date(bids[,1]))
+plot.ts(bidsxts)
+bidsxts
+bidsxts<-xts(bids[,-1],order.by=as.Time(bids[,1]))
+help(strftime)
+bidsxts<-xts(bids[,-1],order.by=strptime(bids[,1], "%Y-%m-%d %H:%M:%S"))
+bidsxts
+plot.ts(bidsxts)
+plot.xts(bidsxts)
+plot.xts(bidsxts[2])
+plot.xts(bidsxts[,2])
+plot.xts(xts(asks[,-1],order.by=strptime(asks[,1], "%Y-%m-%d %H:%M:%S")))
+plot.xts(xts(asks[,-1],order.by=strptime(asks[,1], "%Y-%m-%d %H:%M:%S")))
+plot.xts(xts(bidss[,-1],order.by=strptime(bids[,1], "%Y-%m-%d %H:%M:%S")))
+plot.xts(xts(bids[,-1],order.by=strptime(bids[,1], "%Y-%m-%d %H:%M:%S")))
+plot.xts(bidsxts[,2])
+line(bidsxts[,2],col='r')
+help(line)
+abline(bidsxts[,2],col='r')
+abline(bidsxts[,2])
+abline(bidsxts[,2],col="r")
+abline(bidsxts[,2],col="red")
+abline
+plot.xts(abline(bidsxts[,2],col="red"))
+lines(bidsxts[,2],col='red')
+lines(bidsxts[,2],col='black')
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+help(xts)
+help(plot.xts)
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+help(plot.xts)
+library(quantmod)
+library(quantmod)
+help(chartSeries)
+chartSeries(bidsxts[,2], type='line')
+chartSeries(bids[,2], type='line')
+chartSeries(bidsxts, type='line')
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+help(plot.xts)
+help(plot.xts)
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+?plot.zoo
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+help(plot.xts)
+MYTRADES<-read.csv('testresultstrading.csv',header=f)
+MYTRADES<-read.csv('testresultstrading.csv',header=F)
+MYTRADES
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+source("/Users/user/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/plottingTickData.R")
+allData<-read.csv("20120621AAPL US Equityopen.csv",header=F)
+allData[2]
+allData[3]
+allData[4]
+allData[3]-500
+volSum=allData[3]*allData[4]
+denom=sum(allData[4])
+volSum=sum(volSum)
+volSum
+4/3
+volSum/denom
