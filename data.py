@@ -32,14 +32,20 @@ DATAborsList = []
 
 
 def endOfSessionDATA(myvwap, vwap, buyorsell):
-    DATAtargetList.append(DATAtemptargetList)
-    DATAquoteList.append(DATAtempquoteList)
-    DATAtradeList.append(DATAtemptradeList)
-    DATAtemptargetList = []
-    DATAtempquoteList = []
-    DATAtemptradeList = []
+    if DATAtarget: 
+        DATAtargetList.append([])
+        DATAtargetList[-1] = [ i for i in DATAtemptargetList]
+        DATAtemptargetList[:] = []
+    if DATAquote: 
+        DATAquoteList.append([])
+        DATAquoteList[-1] = [ i for i in DATAtempquoteList]
+        DATAtempquoteList[:] = []
+    if DATAtrade: 
+        DATAtradeList.append([])
+        DATAtradeList[-1] = [ i for i in DATAtemptradeList]
+        DATAtemptradeList[:] = []
     
-    DATAmyvwapList.append(myvwap)
-    DATAvwapList.append(vwap)
-    DATAborsList.append(buyorsell)
+    if DATAmyvwap: DATAmyvwapList.append(myvwap)
+    if DATAvwap: DATAvwapList.append(vwap)
+    if DATAbors: DATAborsList.append(buyorsell)
     

@@ -11,7 +11,7 @@ Created on Nov 6, 2012
 from vwap import *
 from Trading import *
 
-NUM_EXPERIMENTS = 1
+NUM_EXPERIMENTS = 3
 
 dates = [datetime.datetime.strptime('2012-06-21', "%Y-%m-%d"), datetime.datetime.strptime('2012-06-22', "%Y-%m-%d"),
          datetime.datetime.strptime('2012-06-25', "%Y-%m-%d")]
@@ -65,12 +65,13 @@ for i in range(NUM_EXPERIMENTS):
         
     endOfSessionDATA(mornTrading.WhatsMyVWAP(), expVwap, True)
 
+print DATAvwapList
+print DATAmyvwapList
+
 # average results
 # plot results
 
 # f.close()
-
-
 
 # tradeprices = [i for i in mornTrading.trades]
 # times = [i.end for i in volProfiles]
