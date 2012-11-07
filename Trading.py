@@ -12,7 +12,7 @@ class Trading(object):
     classdocs
     '''
     
-    def __init__(self, buying, date, start, end, volProfiles, filename, openPrice, debugFile=None):
+    def __init__(self, buying, date, start, end, volProfiles, filename, openPrice):
         '''
         Constructor
         '''
@@ -25,8 +25,6 @@ class Trading(object):
         self.limit = openPrice
         self.trades = []
         self.dcash = 0
-        
-        self.debugFile = debugFile
         
     def tradeReport(self):
         nonelocations = []
@@ -101,7 +99,7 @@ class Trading(object):
                                                  self.volProfiles[0].end, self.volProfiles[0].volProfile,
                                                  tempEP, bestBid, bestAsk, 2 * tempEP, -6, tempEP ,
                                                  (1.05 * tempEP) - (0.1 * tempEP * int(self.buying)),
-                                                 0.1, -0.5, self.debugFile)
+                                                 0.1, -0.5)
                 firstTime = False
                 # Now have enough info to start
                 
@@ -114,7 +112,7 @@ class Trading(object):
                                                  self.volProfiles[currentWindow + 1].volProfile, tempEP, bestBid,
                                                  bestAsk, 2 * tempEP, theExecutioner.theta, theExecutioner.limit,
                                                  theExecutioner.target, theExecutioner.smithsAlpha,
-                                                 theExecutioner.aggressiveness, self.debugFile)
+                                                 theExecutioner.aggressiveness)
                     currentWindow += 1
                 
                 # What happened? trade? updated bid? or updated ask?
@@ -128,9 +126,7 @@ class Trading(object):
                     trade = False
                     bid = False
                 theExecutioner.newInfo(time, price, trade, bid)
-            # Trading over, create report
-            
-            
+            f.close()
         except IOError:
             print "\nCannot open trade/BB/BA file:\t" + self.filename
 

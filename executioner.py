@@ -27,7 +27,7 @@ class Executioner(object):
 
 
     def __init__(self, date, time, buying, start, end, volume, start_eqlbm, startBB, startBA, mmax,
-                 theta, limit , target, smithsAlpha, agg, debugFile=None):
+                 theta, limit , target, smithsAlpha, agg):
         '''
         Constructor
         '''
@@ -76,8 +76,6 @@ class Executioner(object):
         
         self.maxNewtonItter = 10
         self.maxNewtonError = 0.0001
-        
-        self.debugFile = debugFile
 
 
     def updateEq(self, price):
@@ -142,6 +140,7 @@ class Executioner(object):
                     theta_est = self.newton4Selling() 
                     target = self.eqlbm + (self.marketMax - self.eqlbm) * ((math.exp(-self.aggressiveness * theta_est) - 1) / (math.exp(theta_est) - 1))
                 self.target = target
+        if DATAtarget: DATAtemptargetList.append(self.target)
     
     def calcRshout(self, target):
         # target must be:
@@ -179,8 +178,7 @@ class Executioner(object):
     
     def updateSalpha(self, price):
         self.lastTrades.append(price)
-        if not (len(self.lastTrades) < self.nLastTrades):
-            self.lastTrades.pop(0)
+        if not (len(self.lastTrades) < self.nLastTrades): self.lastTrades.pop(0)
         self.smithsAlpha = math.sqrt(sum(((p - self.eqlbm) ** 2) for p in self.lastTrades) * (1 / float(len(self.lastTrades)))) / self.eqlbm
         if self.smithsAlpha < self.smithsAlphaMin: self.smithsAlphaMin = self.smithsAlpha
         if self.smithsAlpha > self.smithsAlphaMax: self.smithsAlphaMax = self.smithsAlpha
@@ -196,31 +194,25 @@ class Executioner(object):
         if self.buying:
             price = (self.currentBid + (self.target - self.currentBid) / self.nu)
             self.myquote = Quote(self.time, True, price, self.volume)
-#            if self.debugFile is not None:
-#                self.debugFile.write("{} {}, {}\n".format(self.date.strftime('%Y-%m-%d'),
-#                                                          self.time.strftime('%H:%M:%S'), price))
             self.submittedTrade = True
         else: 
             price = (self.currentAsk - (self.currentAsk - self.target) / self.nu)
             self.myquote = Quote(self.time, False, price, self.volume)
-#            if self.debugFile is not None:
-#                self.debugFile.write("{} {}, {}\n".format(self.date.strftime('%Y-%m-%d'),
-#                                                          self.time.strftime('%H:%M:%S'), price))
+
             self.submittedTrade = True
+        if DATAquote: DATAtempquoteList.append(price)
                     
     def checkForClearing(self, price):
         if self.buying and (price <= self.myquote.price):
             self.salePrice = price
             self.notTraded = False
-            if self.debugFile is not None:
-                self.debugFile.write("{} {}, {}\n".format(self.date.strftime('%Y-%m-%d'),
-                                                          self.time.strftime('%H:%M:%S'), price))
+            if DATAtrade:
+                DATAtemptradeList.append(price)
         elif (not self.buying) and (price >= self.myquote.price):
             self.salePrice = price
             self.notTraded = False
-            if self.debugFile is not None:
-                self.debugFile.write("{} {}, {}\n".format(self.date.strftime('%Y-%m-%d'),
-                                                          self.time.strftime('%H:%M:%S'), price))
+            if DATAtrade:
+                DATAtemptradeList.append(price)
             
     def getTradeResults(self):
             return self.salePrice
