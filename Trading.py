@@ -12,7 +12,7 @@ class Trading(object):
     classdocs
     '''
     
-    def __init__(self, buying, date, start, end, volProfiles, filename, openPrice):
+    def __init__(self, buying, date, start, end, volProfiles, filename, openPrice,params):
         '''
         Constructor
         '''
@@ -25,6 +25,7 @@ class Trading(object):
         self.limit = openPrice
         self.trades = []
         self.dcash = 0
+        self.params=params
         
     def tradeReport(self):
         nonelocations = []
@@ -99,7 +100,7 @@ class Trading(object):
                                                  self.volProfiles[0].end, self.volProfiles[0].volProfile,
                                                  tempEP, bestBid, bestAsk, 2 * tempEP, -6, tempEP ,
                                                  (1.05 * tempEP) - (0.1 * tempEP * int(self.buying)),
-                                                 0.1, -0.5)
+                                                 0.1, -0.5, self.params)
                 firstTime = False
                 # Now have enough info to start
                 
@@ -112,7 +113,7 @@ class Trading(object):
                                                  self.volProfiles[currentWindow + 1].volProfile, tempEP, bestBid,
                                                  bestAsk, 2 * tempEP, theExecutioner.theta, theExecutioner.limit,
                                                  theExecutioner.target, theExecutioner.smithsAlpha,
-                                                 theExecutioner.aggressiveness)
+                                                 theExecutioner.aggressiveness, self.params)
                     currentWindow += 1
                 
                 # What happened? trade? updated bid? or updated ask?

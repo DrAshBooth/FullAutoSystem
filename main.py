@@ -46,8 +46,8 @@ for ticker in TICKERS:
         eveVWAP = VWAP(MARKETCLOSE - WINSIZE, MARKETCLOSE, BINSIZE)
     
     # Run R script that does all statistics and creates an xts for complete date range
-    r('source("/Users/User/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA/oneStockXTS.r")')
-    r('setwd("/Users/User/Dropbox/Code/EclipseWorkspace/improved9month/ADtreeAndAA")')
+    r('source("/Users/user/git/FullAutoSystem/oneStockXTS.r")')
+    r('setwd("/Users/user/git/FullAutoSystem")')
     
     # DONT FORGET THE LAG!
     startDatabase = STARTDATE - training_window - lag_date
@@ -65,9 +65,6 @@ for ticker in TICKERS:
     for date in theUTCdates:
         if date >= time.mktime(STARTDATE.timetuple()):
             tradingDays.append(datetime.datetime.fromtimestamp(date))
-
-    for d in tradingDays:
-        print d.strftime('%Y%m%d')
 
     # NEED TO FILL THE VWAPS WITH SOMETHING
     if VWAPon:

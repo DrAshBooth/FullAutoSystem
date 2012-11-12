@@ -14,18 +14,16 @@ from Trading import *
 NUM_EXPERIMENTS = 3
 
 dates = [datetime.datetime.strptime('2012-06-21', "%Y-%m-%d"), datetime.datetime.strptime('2012-06-22', "%Y-%m-%d"),
-         datetime.datetime.strptime('2012-06-25', "%Y-%m-%d")]
+        datetime.datetime.strptime('2012-06-25', "%Y-%m-%d")]
 oPrices = [585.440000, 579.210000, 577.300000]
 
 # Create a file to write our results to
 # f = open('{}/testresultstrading.csv'.format(os.getcwd()), 'w')
 
 for i in range(NUM_EXPERIMENTS):
-    
     date = dates[i]
     filename = os.getcwd() + '/tickData/' + date.strftime('%Y%m%d') + 'AAPL US Equityopen.csv'
     startTrading = datetime.datetime.combine(date, datetime.time(13, 30, 0))    
-    # datetime.datetime.strptime('{} 13:30:00'.format(date.strftime('%Y-%m-%d')), "%Y-%m-%d %H:%M:%S").time()
     endTrading = datetime.datetime.combine(date, datetime.time(14, 0, 0))    
     
     # Make up some VWAP vol profiles
@@ -42,11 +40,11 @@ for i in range(NUM_EXPERIMENTS):
     volProfiles[4].volProfile = 5
     volProfiles.append(VolWindow(datetime.time(13, 55, 0), datetime.time(14, 00, 0)))
     volProfiles[5].volProfile = 5
-    
-    
+   
+   
     # trade
     mornTrading = Trading(True, date, startTrading, endTrading, volProfiles, filename, oPrices[i])
-    mornTrading.trade()
+    mornTrading.trade() 
     
     # skim through file to work out period VWAP
     pqSum = 0

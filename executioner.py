@@ -24,12 +24,23 @@ class Executioner(object):
     '''
     classdocs
     '''
-
-
     def __init__(self, date, time, buying, start, end, volume, start_eqlbm, startBB, startBA, mmax,
-                 theta, limit , target, smithsAlpha, agg):
+                 theta, limit , target, smithsAlpha, agg, params):
         '''
         Constructor
+        
+        params[0] - alpha
+        params[1] - maxQuoteLife
+        params[2] - eta
+        params[3] - theta max 
+        params[4] - theta min
+        params[5] - dAggRel
+        params[6] - dAggAbs
+        params[7] - learn rate Agg
+        params[8] - learn rate theta
+        params[9] - gamma
+        params[10] - smiths alpha N
+        
         '''
         self.date = date
         self.time = time
@@ -42,7 +53,7 @@ class Executioner(object):
         self.sleepTime = 20
         
         self.eqlbm = start_eqlbm
-        self.eqlbm_alpha = 0.3
+        self.eqlbm_alpha = params[0]
         self.marketMax = mmax
         
         self.currentBid = startBB
@@ -50,29 +61,29 @@ class Executioner(object):
         self.submittedTrade = False
         self.myquote = None
         
-        self.maxQuoteLife = datetime.timedelta(seconds=5)
-        self.nu = 3.0
+        self.maxQuoteLife = params[1]
+        self.nu = params[2]
         self.currentTradeSize = None
         
         self.volume = volume
         self.lastTrades = []
-        self.nLastTrades = 5
+        self.nLastTrades = params[10]
         
         self.theta = theta
-        self.thetaMax = 2
-        self.thetaMin = -8
+        self.thetaMax = params[3]
+        self.thetaMin = params[4]
         self.limit = limit
         self.aggressiveness = agg
         
         self.target = target
-        self.dAggAbs = 0.01
-        self.dAggRel = 0.02
-        self.learnRateAgg = 0.4
-        self.learnRateTheta = 0.4
+        self.dAggAbs = params[6]
+        self.dAggRel = params[5]
+        self.learnRateAgg = params[7]
+        self.learnRateTheta = params[8]
         self.smithsAlpha = smithsAlpha
         self.smithsAlphaMin = 0.099
         self.smithsAlphaMax = 0.101
-        self.gamma = 2.0
+        self.gamma = params[9]
         
         self.maxNewtonItter = 10
         self.maxNewtonError = 0.0001

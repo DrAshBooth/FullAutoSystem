@@ -13,6 +13,8 @@ class VolWindow(object):
         self.start = start
         self.end = end
         self.totalVol = 0
+        self.vwap = 0.0
+        self.totalVolByPrice = 0
         self.volProfile = 0
         self.dataPoints = 0
         
@@ -24,6 +26,7 @@ class VolWindow(object):
     def endDay(self):
         self.dataPoints += 1
         self.volProfile = self.totalVol / float(self.dataPoints)
+        self.vwap = self.totalVolByPrice / float(self.totalVol)
         
     
 class VWAP(object):
@@ -51,7 +54,7 @@ class VWAP(object):
     def addDatapointFile(self, filename, verbose):
         # open file with historical data
         try:
-            fullname = filename + '.csv'
+            fullname = filename
             reader = open(fullname, 'rU')
             for line in reader:
                 # line should look like this:
@@ -61,9 +64,11 @@ class VWAP(object):
                     dt = datetime.datetime.strptime(split[0], "%Y-%m-%d %H:%M:%S")
                     t = dt.time()
                     vol = int (split[3])
+                    price = float (split[2])
                     for bins in self.volWindows:
                         if t < bins.end:
                             bins.totalVol += vol
+                            bins.totalVolbyPrice += (vol*price)
                             break
             reader.close()
             
@@ -82,6 +87,12 @@ class VWAP(object):
             vols.append(w.volProfile)
             if verbose: print w.volProfile
         return vols
+    
+    def getBinVWAPS(self):
+        vwaps = []
+        for w in self.volWindows:
+            vwaps.append(w.vwap)
+        return vwaps
     
     def splitOrder(self, totalTradeSize):
         '''
