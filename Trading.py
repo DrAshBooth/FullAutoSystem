@@ -27,37 +27,37 @@ class Trading(object):
         self.dcash = 0
         self.params=params
         
-    def tradeReport(self):
-        nonelocations = []
-        ncntr = 0
-        cashDelta = 0
-        totVol = 0
-        for i in range(len(self.trades)):
-            if self.trades[i] == None:
-                nonelocations.append(i)
-                ncntr += 1
-            else:
-                totVol += self.volProfiles[i].volProfile
-                cashDelta += (self.trades[i] * self.volProfiles[i].volProfile)
-        # What about the nones?? This is a hack that replaces periods that we didn't trade wit the vwap
-        vwap = cashDelta / float(totVol)
-        for i in nonelocations:
-            cashDelta += (vwap * self.volProfiles[i].volProfile)
+#    def tradeReport(self):
+#        nonelocations = []
+#        ncntr = 0
+#        cashDelta = 0
+#        totVol = 0
+#        for i in range(len(self.trades)):
+#            if self.trades[i] == None:
+#                nonelocations.append(i)
+#                ncntr += 1
+#            else:
+#                totVol += self.volProfiles[i].volProfile
+#                cashDelta += (self.trades[i] * self.volProfiles[i].volProfile)
+#        # What about the nones?? This is a hack that replaces periods that we didn't trade wit the vwap
+#        vwap = cashDelta / float(totVol)
+#        for i in nonelocations:
+#            cashDelta += (vwap * self.volProfiles[i].volProfile)
+#        
+#        # Buying or selling?
+#        if self.buying: return -1 * cashDelta
+#        else: return cashDelta
         
-        # Buying or selling?
-        if self.buying: return -1 * cashDelta
-        else: return cashDelta
-        
-    def WhatsMyVWAP(self):
-        cashDelta = 0
-        totVol = 0
-        for i in range(len(self.trades)):
-            if not(self.trades[i] == None):
-                totVol += self.volProfiles[i].volProfile
-                cashDelta += (self.trades[i] * self.volProfiles[i].volProfile)
-        # What about the nones?? This is a hack that replaces periods that we didn't trade wit the vwap
-        myVWAP = cashDelta / float(totVol)
-        return myVWAP
+#    def WhatsMyVWAP(self):
+#        cashDelta = 0
+#        totVol = 0
+#        for i in range(len(self.trades)):
+#            if not(self.trades[i] == None):
+#                totVol += self.volProfiles[i].volProfile
+#                cashDelta += (self.trades[i] * self.volProfiles[i].volProfile)
+#        # What about the nones?? This is a hack that replaces periods that we didn't trade wit the vwap
+#        myVWAP = cashDelta / float(totVol)
+#        return myVWAP
     
     def trade(self):
         noBB = True

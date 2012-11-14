@@ -40,13 +40,15 @@ class Executioner(object):
         params[8] - learn rate theta
         params[9] - gamma
         params[10] - smiths alpha N
+        params[11] = time adaptive parameter phi
         
         '''
         self.date = date
         self.time = time
-        
         self.start = start
         self.end = end
+        self.total_time_sec = (datetime.datetime.combine(self.date,self.end)-datetime.datetime.combine(self.date,self.start)).seconds
+        
         self.buying = buying
         self.notTraded = True
         self.salePrice = None
@@ -84,6 +86,8 @@ class Executioner(object):
         self.smithsAlphaMin = 0.099
         self.smithsAlphaMax = 0.101
         self.gamma = params[9]
+        
+        self.phi = params[11]
         
         self.maxNewtonItter = 10
         self.maxNewtonError = 0.0001
@@ -185,7 +189,10 @@ class Executioner(object):
             delta = (1 + self.dAggRel) * self.calcRshout(target) + self.dAggAbs
         else:
             delta = (1 - self.dAggRel) * self.calcRshout(target) - self.dAggAbs
-        self.aggressiveness = self.aggressiveness + self.learnRateAgg * (delta - self.aggressiveness)
+        vol_adapt_component = self.aggressiveness + self.learnRateAgg * (delta - self.aggressiveness)
+        seconds_elapsed=(datetime.datetime.combine(self.date,self.time)-datetime.datetime.combine(self.date,self.start)).seconds
+        time_component = (math.exp(self.phi * ( seconds_elapsed/float(self.total_time_sec) ) ) - 1) / (math.exp(self.phi)-1.0)
+        self.aggressiveness=vol_adapt_component+(1-vol_adapt_component)*time_component
     
     def updateSalpha(self, price):
         self.lastTrades.append(price)

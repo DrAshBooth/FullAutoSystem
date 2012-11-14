@@ -48,8 +48,8 @@ def populateTradingDays(ticker):
     return tradingDays, openPrices
     
 
-def getFitness(parameters):
-    vwapDiffs = []
+def getFitness(parameters,buying):
+    fitnessess = []
     trading_days , open_prices = populateTradingDays('AAPL')
     for ticker in tickers:
         for (d,date) in enumerate(trading_days):
@@ -89,7 +89,7 @@ def getFitness(parameters):
                 volProfiles[5].volProfile = 5
             
             theVWAP = VWAP(startTrading.time(),endTrading.time(),BINSIZE)
-            trading_session = Trading(True, date, startTrading, endTrading, 
+            trading_session = Trading(buying, date, startTrading, endTrading, 
                                       volProfiles, filename, open_prices[d])
             trading_session.trade()
             trade_prices = trading_session.trades
@@ -98,5 +98,15 @@ def getFitness(parameters):
             the_vwaps = theVWAP.getBinVWAPS()
             
             for (i,price) in enumerate(trade_prices):
-                vwapDiffs.append(the_vwaps[i]-price)
-    return (sum(vwapDiffs)/float(len(vwapDiffs)))
+                if price==None:
+                    fitnessess.append(0.0)
+                else:
+                    if buying: f = (the_vwaps[i]-price)/float(the_vwaps[i])
+                    else: f = (price-the_vwaps[i])/float(the_vwaps[i])
+                    fitnessess.append(1+f)
+
+    return (sum(fitnessess)/float(len(fitnessess)))
+
+
+
+
