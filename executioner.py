@@ -64,7 +64,7 @@ class Executioner(object):
         self.myquote = None
         
         self.maxQuoteLife = params[1]
-        self.nu = params[2]
+        self.eta = params[2]
         self.currentTradeSize = None
         
         self.volume = volume
@@ -210,11 +210,11 @@ class Executioner(object):
         
     def submitQuote(self):
         if self.buying:
-            price = (self.currentBid + (self.target - self.currentBid) / self.nu)
+            price = (self.currentBid + (self.target - self.currentBid) * self.eta)
             self.myquote = Quote(self.time, True, price, self.volume)
             self.submittedTrade = True
         else: 
-            price = (self.currentAsk - (self.currentAsk - self.target) / self.nu)
+            price = (self.currentAsk - (self.currentAsk - self.target) * self.eta)
             self.myquote = Quote(self.time, False, price, self.volume)
 
             self.submittedTrade = True
