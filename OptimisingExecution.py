@@ -72,86 +72,6 @@ class Individual(object):
         
         self.fitness = None
 
-    def mutateAlpha(self,original):
-        lower_bound=0.0
-        upper_bound=1.0
-        new_gene = original + (random.random()/10.-0.05)
-        if new_gene<lower_bound: new_gene=lower_bound
-        elif new_gene>upper_bound: new_gene=upper_bound
-        return new_gene
-        
-    def mutateQmax(self, original):
-        lower_bound=1
-        upper_bound=60
-        new_gene = original+(random.randint(0,6)-3)
-        if new_gene<lower_bound: new_gene=lower_bound
-        elif new_gene>upper_bound: new_gene=upper_bound
-        return new_gene
-    
-    def mutateEta(self,original):
-        lower_bound=0.0
-        upper_bound=1.0
-        new_gene = original + (random.random()/10.-0.05)
-        if new_gene<lower_bound: new_gene=lower_bound
-        elif new_gene>upper_bound: new_gene=upper_bound
-        return new_gene
-    
-    def mutateThetaMax(self, original):
-        lower_bound=0.0
-        upper_bound= 20.0
-        new_gene = original + (random.random()*2.-1.0) 
-        if new_gene<lower_bound: new_gene=lower_bound
-        elif new_gene>upper_bound: new_gene=upper_bound
-        return new_gene
-    
-    def mutateThetaMin(self, original):
-        lower_bound=-20.0
-        upper_bound= 0.0
-        new_gene = original + (random.random()*2.-1.0) 
-        if new_gene<lower_bound: new_gene=lower_bound
-        elif new_gene>upper_bound: new_gene=upper_bound
-        return new_gene
-        
-    def mutatedAggRel(self,original):
-        lower_bound=0.0
-        upper_bound=1.0
-        new_gene = original + (random.random()/10.-0.05)
-        if new_gene<lower_bound: new_gene=lower_bound
-        elif new_gene>upper_bound: new_gene=upper_bound
-        return new_gene
-        
-    def mutatedAggAbs(self,original):
-        lower_bound=0.0
-        upper_bound=1.0
-        new_gene = original + (random.random()/10.-0.05)
-        if new_gene<lower_bound: new_gene=lower_bound
-        elif new_gene>upper_bound: new_gene=upper_bound
-        return new_gene
-    
-    def mutateLearnRateAgg(self,original):
-        lower_bound=0.0
-        upper_bound=1.0
-        new_gene = original + (random.random()/10.-0.05)
-        if new_gene<lower_bound: new_gene=lower_bound
-        elif new_gene>upper_bound: new_gene=upper_bound
-        return new_gene
-    
-    def mutateLearnRateTheta(self,original):
-        lower_bound=0.0
-        upper_bound=1.0
-        new_gene = original + (random.random()/10.-0.05)
-        if new_gene<lower_bound: new_gene=lower_bound
-        elif new_gene>upper_bound: new_gene=upper_bound
-        return new_gene
-    
-    def mutateGamma(self,original):
-        lower_bound=0.0001
-        upper_bound=5.0
-        new_gene = original + (random.random()/2.-0.25)
-        if new_gene<lower_bound: new_gene=lower_bound
-        elif new_gene>upper_bound: new_gene=upper_bound
-        return new_gene
-
     def assessFitness(self):
         trade_at_open = True
         fitnessess = []
@@ -211,16 +131,145 @@ class Individual(object):
                         else: f = (price-the_vwaps[i])/float(the_vwaps[i])
                         fitnessess.append(1+f)
     
-        return (sum(fitnessess)/float(len(fitnessess)))
+        self.fitness =  (sum(fitnessess)/float(len(fitnessess)))
     
-    def mutateGene(self, original_gene):
-        MUTATIONFACTOR = 0.05
-        if isinstance(original_gene,int):
+
             
+class Population(object):
+    def __init__(self,genome,size,file):
+        self.start_genome = genome
+        self.population = []
+        self.generation = 0
+        self.pop_size = size
+        if file:
+            self.data_on = True
+            self.file = open('{}/GAresults.csv'.format(os.getcwd()), 'w')
+    
+    def mutateGene(self, original, loci):
+        if loci==0: # alpha
+            lower_bound=0.0
+            upper_bound=1.0
+            new_gene = original + (random.random()/10.-0.05)
+            if new_gene<lower_bound: new_gene=lower_bound
+            elif new_gene>upper_bound: new_gene=upper_bound
+            return new_gene
+        elif loci==1: # Qmax
+            lower_bound=1
+            upper_bound=60
+            new_gene = original+(random.randint(0,6)-3)
+            if new_gene<lower_bound: new_gene=lower_bound
+            elif new_gene>upper_bound: new_gene=upper_bound
+            return new_gene
+        elif loci==2: #Eta
+            lower_bound=0.0
+            upper_bound=1.0
+            new_gene = original + (random.random()/10.-0.05)
+            if new_gene<lower_bound: new_gene=lower_bound
+            elif new_gene>upper_bound: new_gene=upper_bound
+            return new_gene
+        elif loci==3: #ThetaMax
+            lower_bound=0.0
+            upper_bound= 20.0
+            new_gene = original + (random.random()*2.-1.0) 
+            if new_gene<lower_bound: new_gene=lower_bound
+            elif new_gene>upper_bound: new_gene=upper_bound
+            return new_gene
+        elif loci==4: #ThetaMin
+            lower_bound=-20.0
+            upper_bound= 0.0
+            new_gene = original + (random.random()*2.-1.0) 
+            if new_gene<lower_bound: new_gene=lower_bound
+            elif new_gene>upper_bound: new_gene=upper_bound
+            return new_gene
+        elif loci==5: #dAggRel
+            lower_bound=0.0
+            upper_bound=1.0
+            new_gene = original + (random.random()/10.-0.05)
+            if new_gene<lower_bound: new_gene=lower_bound
+            elif new_gene>upper_bound: new_gene=upper_bound
+            return new_gene
+        elif loci==6: #dAggAbs
+            lower_bound=0.0
+            upper_bound=1.0
+            new_gene = original + (random.random()/10.-0.05)
+            if new_gene<lower_bound: new_gene=lower_bound
+            elif new_gene>upper_bound: new_gene=upper_bound
+            return new_gene
+        elif loci==7: #Learn Rate for Aggressiveness
+            lower_bound=0.0
+            upper_bound=1.0
+            new_gene = original + (random.random()/10.-0.05)
+            if new_gene<lower_bound: new_gene=lower_bound
+            elif new_gene>upper_bound: new_gene=upper_bound
+            return new_gene
+        elif loci==8: #Learn Rate for Theta
+            lower_bound=0.0
+            upper_bound=1.0
+            new_gene = original + (random.random()/10.-0.05)
+            if new_gene<lower_bound: new_gene=lower_bound
+            elif new_gene>upper_bound: new_gene=upper_bound
+            return new_gene
+        elif loci==9: #Gamma
+            lower_bound=0.0001
+            upper_bound=5.0
+            new_gene = original + (random.random()/2.-0.25)
+            if new_gene<lower_bound: new_gene=lower_bound
+            elif new_gene>upper_bound: new_gene=upper_bound
+            return new_gene
+        elif loci==10: #Smith's N
+            lower_bound=1
+            upper_bound=20
+            new_gene = original+(random.randint(0,4)-2)
+            if new_gene<lower_bound: new_gene=lower_bound
+            elif new_gene>upper_bound: new_gene=upper_bound
+            return new_gene
+        elif loci==11: #Phi
+            lower_bound=-20.0
+            upper_bound= 20.0
+            new_gene = original + (random.random()*2.-2.0) 
+            if new_gene<lower_bound: new_gene=lower_bound
+            elif new_gene>upper_bound: new_gene=upper_bound
+            return new_gene
+
+    def crossover(self, mum,dad,tolerance):
+        kid = [self.mutateGene(mum[0],0)]
+        last_from_mum = True
+        for i in range(1,len(mum)):
+            x = random.random()
+            if last_from_mum:
+                if x<=tolerance:
+                    kid.append(self.mutateGene(dad[i],i))
+                    last_from_mum = False
+                else:
+                    kid.append(self.mutateGene(mum[i],i))
+            else:
+                if x<= tolerance:
+                    kid.append(self.mutateGene(mum[i],i))
+                    last_from_mum = True
+                else:
+                    kid.append(self.mutateGene(dad[i],i))
+        return kid
+    
+    def createInitialPop(self):
+        for i in range(self.pop_size):
+            self.population.append(Individual(self.start_genome))
+
+    def assessPopFitness(self):
+        fit_sum=0
+        for agent in self.population:
+            agent.assessFitness()
+            fit_sum+=agent.fitness
+        if self.data_on:
+            avrg_fit = fit_sum/float(self.pop_size)
+            self.file.write("{}, {}\n".format(self.generation,avrg_fit))
+    
+    def createNewGen(self):
+        new_pop = []
+        
             
-        else:
-            
+    
+#############################################
+################# Run It ####################
+#############################################
 
-
-
-
+initial_genome = [0.3, 5, 0.3, 5.0, -10.0, 0.02, 0.01, 0.4, 0.4, 2.0, 5, 5.0]

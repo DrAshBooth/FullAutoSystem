@@ -192,7 +192,10 @@ class Executioner(object):
         vol_adapt_component = self.aggressiveness + self.learnRateAgg * (delta - self.aggressiveness)
         seconds_elapsed=(datetime.datetime.combine(self.date,self.time)-datetime.datetime.combine(self.date,self.start)).seconds
         time_component = (math.exp(self.phi * ( seconds_elapsed/float(self.total_time_sec) ) ) - 1) / (math.exp(self.phi)-1.0)
-        self.aggressiveness=vol_adapt_component+(1-vol_adapt_component)*time_component
+        new_agg = vol_adapt_component+(1-vol_adapt_component)*time_component
+        if new_agg > 1.0: new_agg = 1.0
+        elif new_agg < 0.0: new_agg = 0.000001
+        self.aggressiveness = new_agg
     
     def updateSalpha(self, price):
         self.lastTrades.append(price)
