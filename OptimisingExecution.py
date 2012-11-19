@@ -55,6 +55,7 @@ def populateTradingDays(ticker):
         openPrices.append(float(floatOpenPrices[i]))
     return tradingDays, openPrices, directions
     
+trading_days , open_prices, buyings = populateTradingDays('AAPL')
 
 class Individual(object):
     
@@ -65,7 +66,6 @@ class Individual(object):
     def assessFitness(self):
         trade_at_open = True
         fitnessess = []
-        trading_days , open_prices, buyings = populateTradingDays('AAPL')
         for (d,date) in enumerate(trading_days):
             # Make up some VWAP vol profiles
             buying = buyings[d]
@@ -290,12 +290,12 @@ class Population(object):
 
 initial_genome = [0.3, 5, 0.3, 5.0, -10.0, 0.02, 0.01, 0.4, 0.4, 2.0, 5, 5.0]
 
-the_pop = Population(initial_genome,10,True)
+the_pop = Population(initial_genome,30,True)
 
 fitness=[]
 time = []
 
-the_pop.evolve(1)
+the_pop.evolve(500)
 the_pop.writeGeneToFile()
 
 the_pop.file.close()
