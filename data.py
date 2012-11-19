@@ -12,9 +12,9 @@ Created on Nov 7, 2012
 
 DATAtarget = False
 DATAquote = False
-DATAtrade = True
-DATAvwap = True
-DATAmyvwap = True
+DATAtrade = False
+DATAvwap = False
+DATAmyvwap = False
 DATAbors = False
 
 DATAtemptargetList = []

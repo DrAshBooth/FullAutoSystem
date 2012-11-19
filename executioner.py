@@ -63,7 +63,7 @@ class Executioner(object):
         self.submittedTrade = False
         self.myquote = None
         
-        self.maxQuoteLife = params[1]
+        self.maxQuoteLife = datetime.timedelta(seconds=params[1])
         self.eta = params[2]
         self.currentTradeSize = None
         

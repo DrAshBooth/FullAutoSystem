@@ -20,16 +20,18 @@ import datetime
 from vwap import *
 from Trading import *
 
+from operator import attrgetter
+
 
 BINSIZE = datetime.timedelta(minutes=5)
-tickers = ["ADBE US Equity"]
+ticker = "AAPL US Equity"
 
-start_date = datetime.date(2012,9,1)
-end_date = datetime.date(2012,9,10)
+start_date = datetime.date(2012,6,21)
+end_date = datetime.date(2012,6,25)
 
 
 def populateTradingDays(ticker):
-    r('source("/Users/user/git/FullAutoSystem/oneStockXTS.r")')
+    r('source("/Users/user/git/FullAutoSystem/getPricesDates.r")')
     r('setwd("/Users/user/git/FullAutoSystem")')
     
     r.assign('remoteTICKER', ticker.split()[0])
@@ -57,92 +59,80 @@ def populateTradingDays(ticker):
 class Individual(object):
     
     def __init__(self, genotype):
-        self.alpha = genotype[0]
-        self.q_max = genotype[1]
-        self.eta = genotype[2]
-        self.theta_max = genotype[3]
-        self.theta_min = genotype[4]
-        self.d_agg_rel = genotype[5]
-        self.d_agg_abs = genotype[6]
-        self.learn_rate_agg = genotype[7]
-        self.learn_rate_theta = genotype[8]
-        self.gamma = genotype[9]
-        self.smiths_n = genotype[10]
-        self.phi = genotype[11]
-        
+        self.genotype=genotype
         self.fitness = None
 
     def assessFitness(self):
         trade_at_open = True
         fitnessess = []
         trading_days , open_prices, buyings = populateTradingDays('AAPL')
-        for ticker in tickers:
-            for (d,date) in enumerate(trading_days):
-                # Make up some VWAP vol profiles
-                buying = buyings[d]
-                volProfiles = []
-                if trade_at_open: 
-                    filename = os.getcwd() + '/tickData/' + date.strftime('%Y%m%d') + ticker + 'open.csv'
-                    startTrading = datetime.datetime.combine(date, datetime.time(13, 30, 0))    
-                    endTrading = datetime.datetime.combine(date, datetime.time(14, 0, 0))  
-                    volProfiles.append(VolWindow(datetime.time(13, 30, 0), datetime.time(13, 35, 0)))
-                    volProfiles[0].volProfile = 5 
-                    volProfiles.append(VolWindow(datetime.time(13, 35, 0), datetime.time(13, 40, 0)))
-                    volProfiles[1].volProfile = 5
-                    volProfiles.append(VolWindow(datetime.time(13, 40, 0), datetime.time(13, 45, 0)))
-                    volProfiles[2].volProfile = 5
-                    volProfiles.append(VolWindow(datetime.time(13, 45, 0), datetime.time(13, 50, 0)))
-                    volProfiles[3].volProfile = 5
-                    volProfiles.append(VolWindow(datetime.time(13, 50, 0), datetime.time(13, 55, 0)))
-                    volProfiles[4].volProfile = 5
-                    volProfiles.append(VolWindow(datetime.time(13, 55, 0), datetime.time(14, 00, 0)))
-                    volProfiles[5].volProfile = 5
+        for (d,date) in enumerate(trading_days):
+            # Make up some VWAP vol profiles
+            buying = buyings[d]
+            volProfiles = []
+            if trade_at_open: 
+                filename = os.getcwd() + '/tickData/' + date.strftime('%Y%m%d') + ticker + 'open.csv'
+                startTrading = datetime.datetime.combine(date, datetime.time(13, 30, 0))    
+                endTrading = datetime.datetime.combine(date, datetime.time(14, 0, 0))  
+                volProfiles.append(VolWindow(datetime.time(13, 30, 0), datetime.time(13, 35, 0)))
+                volProfiles[0].volProfile = 5 
+                volProfiles.append(VolWindow(datetime.time(13, 35, 0), datetime.time(13, 40, 0)))
+                volProfiles[1].volProfile = 5
+                volProfiles.append(VolWindow(datetime.time(13, 40, 0), datetime.time(13, 45, 0)))
+                volProfiles[2].volProfile = 5
+                volProfiles.append(VolWindow(datetime.time(13, 45, 0), datetime.time(13, 50, 0)))
+                volProfiles[3].volProfile = 5
+                volProfiles.append(VolWindow(datetime.time(13, 50, 0), datetime.time(13, 55, 0)))
+                volProfiles[4].volProfile = 5
+                volProfiles.append(VolWindow(datetime.time(13, 55, 0), datetime.time(14, 00, 0)))
+                volProfiles[5].volProfile = 5
+            else:
+                filename = os.getcwd() + '/tickData/' + date.strftime('%Y%m%d') + ticker + 'close.csv'
+                startTrading = datetime.datetime.combine(date, datetime.time(13, 30, 0))    
+                endTrading = datetime.datetime.combine(date, datetime.time(14, 0, 0))  
+                volProfiles.append(VolWindow(datetime.time(13, 30, 0), datetime.time(13, 35, 0)))
+                volProfiles[0].volProfile = 5 
+                volProfiles.append(VolWindow(datetime.time(13, 35, 0), datetime.time(13, 40, 0)))
+                volProfiles[1].volProfile = 5
+                volProfiles.append(VolWindow(datetime.time(13, 40, 0), datetime.time(13, 45, 0)))
+                volProfiles[2].volProfile = 5
+                volProfiles.append(VolWindow(datetime.time(13, 45, 0), datetime.time(13, 50, 0)))
+                volProfiles[3].volProfile = 5
+                volProfiles.append(VolWindow(datetime.time(13, 50, 0), datetime.time(13, 55, 0)))
+                volProfiles[4].volProfile = 5
+                volProfiles.append(VolWindow(datetime.time(13, 55, 0), datetime.time(14, 00, 0)))
+                volProfiles[5].volProfile = 5
+            
+            theVWAP = VWAP(startTrading,endTrading,BINSIZE)
+            trading_session = Trading(buying, date, startTrading, endTrading, 
+                                      volProfiles, filename, open_prices[d], self.genotype)
+            trading_session.trade()
+            trade_prices = trading_session.trades
+            
+            theVWAP.addDatapointFile(filename, False)
+            the_vwaps = theVWAP.getBinVWAPS()
+            
+            for (i,price) in enumerate(trade_prices):
+                if price==None: fitnessess.append(0.0)
                 else:
-                    filename = os.getcwd() + '/tickData/' + date.strftime('%Y%m%d') + ticker + 'close.csv'
-                    startTrading = datetime.datetime.combine(date, datetime.time(13, 30, 0))    
-                    endTrading = datetime.datetime.combine(date, datetime.time(14, 0, 0))  
-                    volProfiles.append(VolWindow(datetime.time(13, 30, 0), datetime.time(13, 35, 0)))
-                    volProfiles[0].volProfile = 5 
-                    volProfiles.append(VolWindow(datetime.time(13, 35, 0), datetime.time(13, 40, 0)))
-                    volProfiles[1].volProfile = 5
-                    volProfiles.append(VolWindow(datetime.time(13, 40, 0), datetime.time(13, 45, 0)))
-                    volProfiles[2].volProfile = 5
-                    volProfiles.append(VolWindow(datetime.time(13, 45, 0), datetime.time(13, 50, 0)))
-                    volProfiles[3].volProfile = 5
-                    volProfiles.append(VolWindow(datetime.time(13, 50, 0), datetime.time(13, 55, 0)))
-                    volProfiles[4].volProfile = 5
-                    volProfiles.append(VolWindow(datetime.time(13, 55, 0), datetime.time(14, 00, 0)))
-                    volProfiles[5].volProfile = 5
-                
-                theVWAP = VWAP(startTrading.time(),endTrading.time(),BINSIZE)
-                trading_session = Trading(buying, date, startTrading, endTrading, 
-                                          volProfiles, filename, open_prices[d], self.genotype)
-                trading_session.trade()
-                trade_prices = trading_session.trades
-                
-                theVWAP.addDatapointFile(filename, False)
-                the_vwaps = theVWAP.getBinVWAPS()
-                
-                for (i,price) in enumerate(trade_prices):
-                    if price==None:
-                        fitnessess.append(0.0)
-                    else:
-                        if buying: f = (the_vwaps[i]-price)/float(the_vwaps[i])
-                        else: f = (price-the_vwaps[i])/float(the_vwaps[i])
-                        fitnessess.append(1+f)
+                    if trading_session.buying: f = (the_vwaps[i]-price)/float(the_vwaps[i])
+                    else: f = (price-the_vwaps[i])/float(the_vwaps[i])
+                    fitnessess.append(1+f)
     
         self.fitness =  (sum(fitnessess)/float(len(fitnessess)))
     
 
             
 class Population(object):
-    def __init__(self,genome,size,file):
+    def __init__(self,genome,size,data):
         self.start_genome = genome
         self.population = []
         self.generation = 0
+        self.average_fitness = 0.0
+        self.crossover_tolerance = 0.125
         self.pop_size = size
-        if file:
-            self.data_on = True
+        self.data_on = data
+        if data:
             self.file = open('{}/GAresults.csv'.format(os.getcwd()), 'w')
     
     def mutateGene(self, original, loci):
@@ -231,24 +221,26 @@ class Population(object):
             elif new_gene>upper_bound: new_gene=upper_bound
             return new_gene
 
-    def crossover(self, mum,dad,tolerance):
-        kid = [self.mutateGene(mum[0],0)]
+    def crossover(self, mum,dad):
+        mums_genotype = mum.genotype
+        dads_genotype = dad.genotype
+        kid = [self.mutateGene(mums_genotype[0],0)]
         last_from_mum = True
-        for i in range(1,len(mum)):
+        for i in range(1,len(mums_genotype)):
             x = random.random()
             if last_from_mum:
-                if x<=tolerance:
-                    kid.append(self.mutateGene(dad[i],i))
+                if x<=self.crossover_tolerance:
+                    kid.append(self.mutateGene(dads_genotype[i],i))
                     last_from_mum = False
                 else:
-                    kid.append(self.mutateGene(mum[i],i))
+                    kid.append(self.mutateGene(mums_genotype[i],i))
             else:
-                if x<= tolerance:
-                    kid.append(self.mutateGene(mum[i],i))
+                if x<= self.crossover_tolerance:
+                    kid.append(self.mutateGene(mums_genotype[i],i))
                     last_from_mum = True
                 else:
-                    kid.append(self.mutateGene(dad[i],i))
-        return kid
+                    kid.append(self.mutateGene(dads_genotype[i],i))
+        return Individual(kid)
     
     def createInitialPop(self):
         for i in range(self.pop_size):
@@ -259,17 +251,56 @@ class Population(object):
         for agent in self.population:
             agent.assessFitness()
             fit_sum+=agent.fitness
+        self.average_fitness = fit_sum/float(self.pop_size)
         if self.data_on:
-            avrg_fit = fit_sum/float(self.pop_size)
-            self.file.write("{}, {}\n".format(self.generation,avrg_fit))
+            self.file.write("{}, {}\n".format(self.generation,self.average_fitness))
     
     def createNewGen(self):
-        new_pop = []
-        
+        new_pop = [max(self.population,key=attrgetter('fitness'))] #create new pop and add fittest from previous
+        for i in (range(self.pop_size-1)):
+            rand_three = random.sample(self.population,3)
+            rand_three = sorted(rand_three, key=attrgetter('fitness'), reverse=True)
+            mum = rand_three[0]
+            dad = rand_three[1]
+            kid = self.crossover(mum, dad)
+            new_pop.append(kid)
             
+        self.population = new_pop
+        
+    def evolve(self,generations):
+        self.createInitialPop()
+        self.assessPopFitness()
+        for i in range(generations):
+            self.createNewGen()
+            self.assessPopFitness()
+            print "generation ", self.generation
+            self.generation+=1
+            
+    def writeGeneToFile(self):
+        of = open('{}/GAgenotypes.csv'.format(os.getcwd()), 'w')
+        for i in self.population:
+            of.write(",".join(str(x) for x in i.genotype))
+            of.write('\n')
+        of.close()
     
 #############################################
 ################# Run It ####################
 #############################################
 
+
 initial_genome = [0.3, 5, 0.3, 5.0, -10.0, 0.02, 0.01, 0.4, 0.4, 2.0, 5, 5.0]
+
+the_pop = Population(initial_genome,10,True)
+
+fitness=[]
+time = []
+
+the_pop.evolve(1)
+the_pop.writeGeneToFile()
+
+the_pop.file.close()
+
+
+
+
+

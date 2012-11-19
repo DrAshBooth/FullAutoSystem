@@ -98,12 +98,11 @@ class Trading(object):
                 if firstTime: 
                     theExecutioner = Executioner(dt.date(), time, self.buying, self.volProfiles[0].start,
                                                  self.volProfiles[0].end, self.volProfiles[0].volProfile,
-                                                 tempEP, bestBid, bestAsk, 2 * tempEP, -6, tempEP ,
-                                                 (1.05 * tempEP) - (0.1 * tempEP * int(self.buying)),
+                                                 tempEP, bestBid, bestAsk, 2 * tempEP, -6, self.limit ,
+                                                 (1.03 * tempEP) - (0.1 * tempEP * int(self.buying)),
                                                  0.1, -0.5, self.params)
                 firstTime = False
                 # Now have enough info to start
-                
                 # Are we in a new time period?
                 if time > self.volProfiles[currentWindow].end:
                     self.trades.append(theExecutioner.getTradeResults())
@@ -127,6 +126,7 @@ class Trading(object):
                     trade = False
                     bid = False
                 theExecutioner.newInfo(time, price, trade, bid)
+            self.trades.append(theExecutioner.getTradeResults())
             f.close()
         except IOError:
             print "\nCannot open trade/BB/BA file:\t" + self.filename

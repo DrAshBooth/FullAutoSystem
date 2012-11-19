@@ -68,7 +68,7 @@ class VWAP(object):
                     for bins in self.volWindows:
                         if t < bins.end:
                             bins.totalVol += vol
-                            bins.totalVolbyPrice += (vol*price)
+                            bins.totalVolByPrice += (vol*price)
                             break
             reader.close()
             
