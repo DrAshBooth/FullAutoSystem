@@ -134,10 +134,12 @@ class Population(object):
         self.data_on = data
         if data:
             self.file = open('{}/GAresults.csv'.format(os.getcwd()), 'w')
+            self.file.write('generation, alpha, qmax, eta, thetamax, thetamin, daggrel, \
+                        daggabs, beta1, beta2, gamma, n, phi, fitness\n')
     
     def mutateGene(self, original, loci):
         if loci==0: # alpha
-            lower_bound=0.0
+            lower_bound=0.01
             upper_bound=1.0
             new_gene = original + (random.random()/10.-0.05)
             if new_gene<lower_bound: new_gene=lower_bound
@@ -151,14 +153,14 @@ class Population(object):
             elif new_gene>upper_bound: new_gene=upper_bound
             return new_gene
         elif loci==2: #Eta
-            lower_bound=0.0
+            lower_bound=0.01
             upper_bound=1.0
             new_gene = original + (random.random()/10.-0.05)
             if new_gene<lower_bound: new_gene=lower_bound
             elif new_gene>upper_bound: new_gene=upper_bound
             return new_gene
         elif loci==3: #ThetaMax
-            lower_bound=0.0
+            lower_bound=0.01
             upper_bound= 20.0
             new_gene = original + (random.random()*2.-1.0) 
             if new_gene<lower_bound: new_gene=lower_bound
@@ -166,7 +168,7 @@ class Population(object):
             return new_gene
         elif loci==4: #ThetaMin
             lower_bound=-20.0
-            upper_bound= 0.0
+            upper_bound= -0.01
             new_gene = original + (random.random()*2.-1.0) 
             if new_gene<lower_bound: new_gene=lower_bound
             elif new_gene>upper_bound: new_gene=upper_bound
@@ -200,7 +202,7 @@ class Population(object):
             elif new_gene>upper_bound: new_gene=upper_bound
             return new_gene
         elif loci==9: #Gamma
-            lower_bound=0.0001
+            lower_bound=0.001
             upper_bound=5.0
             new_gene = original + (random.random()/2.-0.25)
             if new_gene<lower_bound: new_gene=lower_bound
@@ -253,7 +255,10 @@ class Population(object):
             fit_sum+=agent.fitness
         self.average_fitness = fit_sum/float(self.pop_size)
         if self.data_on:
-            self.file.write("{}, {}\n".format(self.generation,self.average_fitness))
+            line_string = str(self.generation) +','
+            genotype = ",".join(str(x) for x in self.population[0].genotype)
+            line_string=line_string+genotype+','+self.population[0].fitness+'\n'
+            self.file.write(line_string)
     
     def createNewGen(self):
         new_pop = [max(self.population,key=attrgetter('fitness'))] #create new pop and add fittest from previous
@@ -277,9 +282,11 @@ class Population(object):
             self.generation+=1
             
     def writeGeneToFile(self):
-        of = open('{}/GAgenotypes.csv'.format(os.getcwd()), 'w')
+        of = open('{}/GAfinal.csv'.format(os.getcwd()), 'w')
         for i in self.population:
-            of.write(",".join(str(x) for x in i.genotype))
+            line_string = ",".join(str(x) for x in i.genotype)
+            line_string=line_string+','+str(i.fitness)
+            of.write(line_string)
             of.write('\n')
         of.close()
     
@@ -292,10 +299,7 @@ initial_genome = [0.3, 5, 0.3, 5.0, -10.0, 0.02, 0.01, 0.4, 0.4, 2.0, 5, 5.0]
 
 the_pop = Population(initial_genome,30,True)
 
-fitness=[]
-time = []
-
-the_pop.evolve(500)
+the_pop.evolve(5)
 the_pop.writeGeneToFile()
 
 the_pop.file.close()

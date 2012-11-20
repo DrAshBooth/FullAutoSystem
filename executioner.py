@@ -199,7 +199,7 @@ class Executioner(object):
     
     def updateSalpha(self, price):
         self.lastTrades.append(price)
-        if not (len(self.lastTrades) < self.nLastTrades): self.lastTrades.pop(0)
+        if not (len(self.lastTrades) <= self.nLastTrades): self.lastTrades.pop(0)
         self.smithsAlpha = math.sqrt(sum(((p - self.eqlbm) ** 2) for p in self.lastTrades) * (1 / float(len(self.lastTrades)))) / self.eqlbm
         if self.smithsAlpha < self.smithsAlphaMin: self.smithsAlphaMin = self.smithsAlpha
         if self.smithsAlpha > self.smithsAlphaMax: self.smithsAlphaMax = self.smithsAlpha

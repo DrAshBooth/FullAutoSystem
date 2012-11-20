@@ -109,8 +109,10 @@ class Trading(object):
                     theExecutioner = Executioner(dt.date(), time, self.buying,
                                                  self.volProfiles[currentWindow + 1].start,
                                                  self.volProfiles[currentWindow + 1].end,
-                                                 self.volProfiles[currentWindow + 1].volProfile, tempEP, bestBid,
-                                                 bestAsk, 2 * tempEP, theExecutioner.theta, theExecutioner.limit,
+                                                 self.volProfiles[currentWindow + 1].volProfile, 
+                                                 theExecutioner.eqlbm, theExecutioner.currentBid,
+                                                 theExecutioner.currentAsk, theExecutioner.marketMax, 
+                                                 theExecutioner.theta, theExecutioner.limit,
                                                  theExecutioner.target, theExecutioner.smithsAlpha,
                                                  theExecutioner.aggressiveness, self.params)
                     currentWindow += 1
