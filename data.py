@@ -12,7 +12,7 @@ Created on Nov 7, 2012
 
 DATAtarget = False
 DATAquote = False
-DATAtrade = False
+DATAtrade = True
 DATAvwap = False
 DATAmyvwap = False
 DATAbors = False

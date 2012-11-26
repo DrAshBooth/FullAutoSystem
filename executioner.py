@@ -51,7 +51,7 @@ class Executioner(object):
         
         self.buying = buying
         self.notTraded = True
-        self.salePrice = None
+        self.trade = []
         self.sleepTime = 20
         
         self.eqlbm = start_eqlbm
@@ -223,20 +223,20 @@ class Executioner(object):
             self.submittedTrade = True
         if DATAquote: DATAtempquoteList.append(price)
                     
-    def checkForClearing(self, price):
+    def checkForClearing(self, price,time):
         if self.buying and (price <= self.myquote.price):
-            self.salePrice = price
+            self.trade = [datetime.datetime.combine(self.date, time),price]
             self.notTraded = False
             if DATAtrade:
                 DATAtemptradeList.append(price)
         elif (not self.buying) and (price >= self.myquote.price):
-            self.salePrice = price
+            self.trade = [datetime.datetime.combine(self.date, time),price]
             self.notTraded = False
             if DATAtrade:
                 DATAtemptradeList.append(price)
             
     def getTradeResults(self):
-            return self.salePrice
+            return self.trade
         
     def newInfo(self, time, price, trade, bid):
         self.time = time
@@ -273,7 +273,7 @@ class Executioner(object):
                     self.submitQuote()
                 # Will it clear?
                 if trade:
-                    self.checkForClearing(price)
+                    self.checkForClearing(price,time)
             # If wait time is over and I am yet to submit a quote - submit one
             elif (self.sleepTime <= 0):
                 self.submitQuote()

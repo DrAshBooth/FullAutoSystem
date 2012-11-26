@@ -1,0 +1,26 @@
+data<-read.csv("GAresults.csv", header=T)
+names(data)
+attach(data)
+
+#plot(fitness~log(generation))
+#pdf('fitness_over_time.pdf')
+
+
+par(mfrow=c(3,2))
+plot(alpha~log(generation))
+plot(qmax~log(generation),ylab='Q')
+plot(eta~log(generation))
+plot(thetamax~log(generation))
+plot(thetamin~log(generation))
+plot(daggrel~log(generation),ylab='lambda_r')
+pdf('first6_over_time.pdf')
+
+quartz()
+par(mfrow=c(3,2))
+plot(daggabs~log(generation),ylab='lambda_a')
+plot(beta1~log(generation))
+plot(beta2~log(generation))
+plot(gamma~log(generation))
+plot(n~log(generation),ylab='n_alpha')
+plot(phi~log(generation))
+pdf('second6_over_time.pdf')

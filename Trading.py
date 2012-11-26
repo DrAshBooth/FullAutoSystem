@@ -27,6 +27,7 @@ class Trading(object):
         self.dcash = 0
         self.params=params
         
+#  EVERYTHING COMMENTED OUT IS REDUNDANT!!!!!!!       
 #    def tradeReport(self):
 #        nonelocations = []
 #        ncntr = 0
